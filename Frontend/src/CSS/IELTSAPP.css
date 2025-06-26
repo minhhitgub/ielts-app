@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+.ielts-app {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.skills-container {
+    width: 1000px;
+    height: 500px;
+  font-size: 1000px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.skill-box {
+  font-size: 20px;
+  display: flex;          /* nếu muốn căn nội dung bên trong */
+  justify-content: space-between;
+}
