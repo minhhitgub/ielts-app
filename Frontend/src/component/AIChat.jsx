@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { askGemini } from '../gemini';
 
-function AIChat() {
+function AIChat({ skill }) {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+  
+ useEffect(() => {
+    let greeting = "Hello! How can I help you today?";
+    if (skill === "writing") greeting = "Welcome to IELTS Writing practice! Ask me anything about writing.";
+    if (skill === "listening") greeting = "Welcome to IELTS Listening practice! Ask me anything about listening.";
+    if (skill === "speaking") greeting = "Welcome to IELTS Speaking practice! Ask me anything about speaking.";
+    if (skill === "reading") greeting = "Welcome to IELTS Reading practice! Ask me anything about reading.";
+    setMessages([{ role: 'bot', text: greeting }]);
+  }, [skill]);
 
   const handleSend = async () => {
     if (!input.trim()) return;

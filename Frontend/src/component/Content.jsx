@@ -33,12 +33,14 @@ function Content({ selected }) {
     );
   }
   if (selected && selected.startsWith('Chatbot')) {
-    return (
-      <div className="flex-1 p-6 bg-gray-50">
-        <AIChat/>
-      </div>
-    );
-  }
+  // Lấy skill từ selected, ví dụ: "Chatbot - Writing" => "writing"
+  const skill = selected.split(' - ')[1]?.toLowerCase() || '';
+  return (
+    <div className="flex-1 p-6 bg-gray-50">
+      <AIChat skill={skill} />
+    </div>
+  );
+}
   
   return (
     <div className="flex-1 p-6 bg-gray-50 flex items-center justify-center text-gray-400 text-lg">
