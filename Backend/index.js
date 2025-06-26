@@ -1,12 +1,16 @@
+
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+
+console.log("Gemini API key:", process.env.GEMINI_API_KEY);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = "AIzaSyCWcvfnMWjzWNmKJByF_Gu8ZrVdrTLsvGE"; // Replace with your Gemini API key
+const API_KEY = process.env.GEMINI_API_KEY; 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 app.post('/ask-gemini', async (req, res) => {

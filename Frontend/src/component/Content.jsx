@@ -32,20 +32,19 @@ function Content({ selected }) {
       </div>
     );
   }
-    if (selected && selected.startsWith('Chatbot')) {
+  if (selected && selected.startsWith('Chatbot')) {
+    return (
+      <div className="flex-1 p-6 bg-gray-50">
+        <AIChat/>
+      </div>
+    );
+  }
+  
   return (
-    <div className="flex-1 p-6 bg-gray-50">
-      <AIChat/>
+    <div className="flex-1 p-6 bg-gray-50 flex items-center justify-center text-gray-400 text-lg">
+      Vui lòng chọn một chức năng ở menu bên trái.
     </div>
   );
-}
-  
-  // Với các lựa chọn khác (Chatbot, hoặc chưa chọn gì)
-  return (
-  <div className="flex-1 p-6 bg-gray-50 flex items-center justify-center text-gray-400 text-lg">
-    Vui lòng chọn một chức năng ở menu bên trái.
-  </div>
-);
 }
 
 export default Content;
