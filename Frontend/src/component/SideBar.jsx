@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const options = ['Writing', 'Speaking', 'Listening', 'Reading'];
 
 function Sidebar({ onSelect }) {
   const [hovered, setHovered] = useState(null);
+  const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    navigate('/'); 
+  };
 
   return (
     <div className="w-64 bg-red-800 text-white p-4 flex flex-col">
@@ -35,6 +42,13 @@ function Sidebar({ onSelect }) {
           )}
         </div>
       ))}
+      
+      <button
+        className="mt-auto w-full py-2 px-4 bg-gray-600 hover:bg-red-600 rounded"
+        onClick={handleLogout}
+      >
+        Đăng xuất
+      </button>
     </div>
   );
 }

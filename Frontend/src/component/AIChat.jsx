@@ -18,10 +18,11 @@ function AIChat({ skill }) {
     if (!input.trim()) return;
 
     const userMsg = { role: 'user', text: input };
-    setMessages(prev => [...prev, userMsg]);
+    const newMessages = [...messages, userMsg]; 
+    setMessages(newMessages);
     setInput('');
 
-    const botReply = await askGemini(input);
+    const botReply = await askGemini(newMessages); 
     const botMsg = { role: 'bot', text: botReply };
 
     setMessages(prev => [...prev, botMsg]);
