@@ -81,7 +81,7 @@ function Home() {
             />
           </div>
           {error && <div className="text-red-500 mb-2">{error}</div>}
-          <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">
+          <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-[50%]">
             {isRegister ? 'Sign Up' : 'Login'}
           </button>
         </form>

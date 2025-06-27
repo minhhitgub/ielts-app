@@ -1,6 +1,4 @@
 import { StrictMode, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import IeltsApp from './component/IELTSAPP.jsx'
 import SearchBar from './component/SearchBar.jsx'
@@ -21,6 +19,14 @@ function App() {
           element={
             <PrivateRoute>
               <UserPage />
+            </PrivateRoute>
+          }
+        /> 
+        <Route
+          path="/test/:id"
+          element={
+            <PrivateRoute>
+              <TestPage />
             </PrivateRoute>
           }
         /> 

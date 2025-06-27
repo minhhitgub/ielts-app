@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { askGemini } from '../gemini';
 
 function AIChat({ skill }) {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef(null);
   
  useEffect(() => {
     let greeting = "Hello! How can I help you today?";
@@ -28,6 +29,12 @@ function AIChat({ skill }) {
     setMessages(prev => [...prev, botMsg]);
   };
 
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-gray-50">
       <div className="w-full h-[90vh] flex flex-col bg-white rounded-none shadow-none p-4 overflow-hidden">
@@ -49,6 +56,7 @@ function AIChat({ skill }) {
               </div>
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
 
         <div className="flex items-center pt-2 bg-white">

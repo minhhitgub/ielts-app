@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-const { Pool } = require('pg'); // Thêm dòng này
+const { Pool } = require('pg');
 
 console.log("Gemini API key:", process.env.GEMINI_API_KEY);
 
@@ -15,7 +15,7 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 
 const DBPASS = process.env.DB_PASS; 
 
-// Kết nối PostgreSQL
+
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -24,7 +24,28 @@ const pool = new Pool({
   port: 5432,
 });
 
-// API đăng nhập
+app.get('/api/tests', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM tests ORDER BY id');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.get('/api/questions/:testId', async (req, res) => {
+  const { testId } = req.params;
+  try {
+    const result = await pool.query(
+      'SELECT * FROM questions WHERE test_id = $1 ORDER BY question_number',
+      [testId]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -42,17 +63,17 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// API đăng ký tài khoản mới
+
 app.post('/api/register', async (req, res) => {
   const { username, password } = req.body;
   console.log('Register:', username, password); 
   try {
-    // Kiểm tra username đã tồn tại chưa
+    
     const check = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
     if (check.rows.length > 0) {
       return res.status(400).json({ success: false, message: 'Username already exists' });
     }
-    // Thêm user mới
+    
     await pool.query(
       'INSERT INTO users (username, password) VALUES ($1, $2)',
       [username, password]
