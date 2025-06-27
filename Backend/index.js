@@ -13,12 +13,14 @@ app.use(express.json());
 const API_KEY = process.env.GEMINI_API_KEY; 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
+const DBPASS = process.env.DB_PASS; 
+
 // Kết nối PostgreSQL
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'ielts_app',
-  password: 'lagne1557', // Thay bằng mật khẩu postgres của bạn
+  password: DBPASS, 
   port: 5432,
 });
 
@@ -43,7 +45,7 @@ app.post('/api/login', async (req, res) => {
 // API đăng ký tài khoản mới
 app.post('/api/register', async (req, res) => {
   const { username, password } = req.body;
-  console.log('Register:', username, password); // Thêm dòng này
+  console.log('Register:', username, password); 
   try {
     // Kiểm tra username đã tồn tại chưa
     const check = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
@@ -62,14 +64,14 @@ app.post('/api/register', async (req, res) => {
 });
 
 
-// API Gemini giữ nguyên
+
 app.post('/ask-gemini', async (req, res) => {
   try {
     const { messages } = req.body;
     if (!Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({ error: 'No messages provided' });
     }
-    // Chuyển đổi sang định dạng Gemini yêu cầu
+    
     const geminiMessages = messages.map(msg => ({
       role: msg.role === 'bot' ? 'model' : 'user',
       parts: [{ text: msg.text }]

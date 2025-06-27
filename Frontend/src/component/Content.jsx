@@ -5,14 +5,14 @@ import AIChat from './AIChat';
 function Content({ selected }) {
   const navigate = useNavigate();
 
-  // Giả lập danh sách bài thi
+  
   const mockTests = [
     { id: 1, title: 'Đề 1 - Writing' },
     { id: 2, title: 'Đề 2 - Writing' },
     { id: 3, title: 'Đề 3 - Writing' }
   ];
 
-  // Chỉ hiển thị khi chọn "Thi thử - X"
+  
   if (selected && selected.startsWith('Thi thử')) {
     return (
       <div className="flex-1 p-6 bg-gray-100">

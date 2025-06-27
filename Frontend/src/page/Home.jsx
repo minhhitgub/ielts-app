@@ -21,6 +21,7 @@ function Home() {
     const data = await res.json();
     if (data.success) {
       localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('username', username);
       navigate('/userpage');
     } else {
       setError('Sai tài khoản hoặc mật khẩu!');

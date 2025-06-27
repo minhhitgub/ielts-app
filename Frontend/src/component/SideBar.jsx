@@ -6,14 +6,19 @@ const options = ['Writing', 'Speaking', 'Listening', 'Reading'];
 function Sidebar({ onSelect }) {
   const [hovered, setHovered] = useState(null);
   const navigate = useNavigate();
+  const username = localStorage.getItem('username');
   
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('username');
     navigate('/'); 
   };
 
   return (
     <div className="w-64 bg-red-800 text-white p-4 flex flex-col">
+      <div className="mb-6 p-3 bg-red-900 rounded text-center font-bold">
+        {username ? `Xin chào, ${username}` : 'Chưa đăng nhập'}
+      </div>
       {['Thi thử', 'Chatbot'].map((item) => (
         <div key={item} className="relative mb-4">
           <button
