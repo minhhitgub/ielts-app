@@ -30,7 +30,7 @@ function Home() {
       <input type="password" id="password" name="password" className="w-[50%] border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="off"/>
     </div>
     
-    <div className="mb-4 flex items-center">
+    <div className="mb-4 flex">
       <input type="checkbox" id="remember" name="remember" className="text-blue-500"/>
       <label for="remember" className="text-gray-600  ml-2">Remember Me</label>
     </div>
